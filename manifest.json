@@ -1,0 +1,10 @@
+{
+"name": "babify",
+"version": "1.0",
+"manifest_version": 2,
+"description": "Simplify complex words!",
+"browser_action":{
+	"icon": "icon.png",
+	"default_popup": "popup.html"
+}	
+}
