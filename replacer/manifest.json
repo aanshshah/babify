@@ -1,8 +1,8 @@
 {
 	"manifest_version": 2,
-	"name": "Caaaarbs",
+	"name": "Word Replacer",
 	"version": "1.0",
-	"description": "Paleo's best friend.",
+	"description": "Replaces a simple word or group of words!",
 	"icons": { "16": "images/carbs16.png",
            "48": "images/carbs48.png",
           "128": "images/carbs128.png" },

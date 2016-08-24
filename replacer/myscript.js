@@ -1,11 +1,19 @@
-//credit goes to Steven Frank of Cloud to Butt (https://github.com/panicsteve/cloud-to-butt/)
+
+/*
+* 
+* Tested the function on https://en.wikipedia.org/wiki/Pasta and works mildly well. 
+* Need to implement lower case and uppercase versions of each word. 
+* 
+* Test case 1: change the words 'the', 'and', 'or'. Did not change all the words on the page 
+* Test case 2: change the word 'pasta'. Did not change all the words on the page
+* Test case 3: change the word 'Etymology'. Changed the 2/2 words on the page. 
+*
+*/
 
 walk(document.body);
 
 function walk(node)  
 {
-	// I stole this function from here:
-	// http://is.gd/mwZp7E
 	
 	var child, next;
 
@@ -32,13 +40,12 @@ function walk(node)
 function handleText(textNode) 
 {
 	var v = textNode.nodeValue;
+	var word_list = ['Etymology'];
 
-	v = v.replace(/\bpasta\b/g, "caaaaarbs");
-	v = v.replace(/\bbread\b/g, "caaaaarbs");
-	v = v.replace(/\bBread\b/g, "Caaaaarbs");
-	v = v.replace(/\bScones\b/g, "Caaaaarbs");
-	v = v.replace(/\bBuns\b/g, "Caaaaarbs");
-	v = v.replace(/\bspaghetti\b/g, "caaaaarbs");
-	
-	textNode.nodeValue = v;
+		for (i = 0; i < word_list.length; i++) { 
+			// console.log(word_list[i])
+		v = v.replace(word_list[i], "aansh");
+		textNode.nodeValue = v;
+	}
 }
+
