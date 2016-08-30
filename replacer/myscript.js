@@ -11,15 +11,13 @@
 */
 
 // walk(document.body);
-// tester();
-caller();
+ tester();
+//caller();
 
 /*
 * Basically an intiallizer. Code inside this method is called above and used to call methods.
 */
 function caller(){
-
-	
 
 	var x = new_count('hashmi'); //Calls the method word_count 
 	var y = word_complex(x); //Calls the method word_complex
@@ -33,7 +31,14 @@ function caller(){
 * 3. if complex, replace with synonym (assume we have a synonym) 
 */ 
 function replace_word(word_analyzed){
-
+	var syllables = new_count(word_analyzed);
+	var complex = word_complex(syllables);
+	if (complex) {
+		var synonym = 'easy';
+		return synonym;
+	} else {
+		return word_analyzed;
+	}
 }
 
 /*
@@ -71,19 +76,18 @@ function walk(node)
 function handleText(textNode) 
 {
 
-	// var v = textNode.nodeValue;
-	// var word_list = ['Etymology'];
+	var v = textNode.nodeValue;
+	var word_list = ['Etymology'];
 	
-	// var c = document.body.innerHTML;
-	// console.log(c)
-
+	var c = document.body.innerHTML;
+	console.log(c)
 	
-	// 	for (i = 0; i < word_list.length; i++) { 
-
-	// 		// console.log(word_list[i])
-	// 	v = v.replace(word_list[i], "aansh");
-	// 	textNode.nodeValue = v;
-	// }
+	for (i = 0; i < word_list.length; i++) { 
+		// console.log(word_list[i])
+		var synonym = replace_word(word_list[i])
+		v = v.replace(word_list[i], synonym);
+		textNode.nodeValue = v;
+	}
 }
 
 /*
@@ -94,19 +98,19 @@ function handleText(textNode)
 function tester(){
 	var word_list=[]; //array intialization
 		var all = document.body.getElementsByTagName("*"); //gets all the tags on the page
-for (var i=0, max=all.length; i < max; i++) { //iterates through all the tags
-  // console.log(all[i].nodeValue);
-  word_list.push(all[i].nodeValue); //adds the words to an array
-  for(var j = 0, max2 = all[i].childNodes.length; j < max2; j++) { //iterates through the tags of the children
-    // console.log(all[i].childNodes[j].nodeValue);
-    word_list.push(all[i].childNodes[j].nodeValue); //adds those words to the array
-  }
-}
-console.log(word_list.length); //prints the number of words in the array
-// for (var k=0; k < word_list.length; j++){
-// console.log(word_list[k]);	
-// }
+	for (var i=0, max=all.length; i < max; i++) { //iterates through all the tags
+  		// console.log(all[i].nodeValue);
+  		word_list.push(all[i].nodeValue); //adds the words to an array
+  		for(var j = 0, max2 = all[i].childNodes.length; j < max2; j++) { //iterates through the tags of the children
+    		// console.log(all[i].childNodes[j].nodeValue);
+    		word_list.push(all[i].childNodes[j].nodeValue); //adds those words to the array
+  		}
+	}
 
+	console.log(word_list.length); //prints the number of words in the array
+	// for (var k=0; k < word_list.length; k++){
+	// console.log(word_list[k]);	
+	// }
 }
 
 /*
@@ -115,28 +119,28 @@ console.log(word_list.length); //prints the number of words in the array
 function httpGet(theUrl)
 {
 	var xhr = new XMLHttpRequest();
-xhr.open("GET", theUrl, false);
-xhr.send();
-var x = xhr.responseText;
-var parser = new DOMParser();
-var xmlDoc = parser.parseFromString(xhr.responseText, "application/xml");
-// console.log(xmlDoc);
-if( xmlDoc.getElementsByTagName("suggestion").length == 0 )
-{
- console.log('worked');
- console.log(x);
-}else{
-	console.log("didn't work");
-	console.log(x);
-}
-// console.log(xhr.responseText)
-// console.log(xhr.status);
-// console.log(xhr.statusText);
+	xhr.open("GET", theUrl, false);
+	xhr.send();
+	var x = xhr.responseText;
+	var parser = new DOMParser();
+	var xmlDoc = parser.parseFromString(xhr.responseText, "application/xml");
+	// console.log(xmlDoc);
+	if( xmlDoc.getElementsByTagName("suggestion").length == 0 ) {
+	 console.log('worked');
+	 console.log(x);
+	} else {
+		console.log("didn't work");
+		console.log(x);
+	}
+	// console.log(xhr.responseText)
+	// console.log(xhr.status);
+	// console.log(xhr.statusText);
     // var xmlHttp = new XMLHttpRequest();
     // xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
     // xmlHttp.send( null );
     // return xmlHttp.responseText;
 }
+
 /*
 * This function tells us the number of syllables in a word when called 
 * 
