@@ -1,0 +1,12 @@
+{
+  "name": "synonym",
+  "version": "1.0.0",
+  "description": "Creates and searches for synonyms ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Aansh Shah",
+  "license": "ISC",
+  "dependencies": {}
+}
