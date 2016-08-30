@@ -12,24 +12,34 @@
 
 // walk(document.body);
 // tester();
-// caller();
+caller();
 
-
+/*
+* Basically an intiallizer. Code inside this method is called above and used to call methods.
+*/
 function caller(){
 
-	// var x = httpGet('http://words.bighugelabs.com/api/2/d8ab7d606fcfe74a27f9dc072a5bc78c/word/json');
-	// var word = 'disseminate';
-	// var elementary_dictionary_api = 'http://www.dictionaryapi.com/api/v1/references/sd2/xml/' + word + '?key=a7cf95e7-6043-4374-8580-726a152fd156';
-	// console.log(elementary_dictionary_api);
-	// var x = httpGet(elementary_dictionary_api);
-	// console.log(x);
-	// x = x[0]
-	// console.log(x);
+	
 
-	var x = new_count('hashmi');
-	var y = word_complex(x);
-	console.log(y);
+	var x = new_count('hashmi'); //Calls the method word_count 
+	var y = word_complex(x); //Calls the method word_complex
+	console.log(y); //Prints to the browser console. 
 }
+
+/*
+* This function(s) needs to do the following:
+* 1. get the number of syllables in the word
+* 2. determine if the word is complex
+* 3. if complex, replace with synonym (assume we have a synonym) 
+*/ 
+function replace_word(word_analyzed){
+
+}
+
+/*
+* This function "walks" or traverses through all the words on the page by looking at 
+* each node and the children of the nodes to obtain the text on the page.
+*/
 function walk(node)  
 {
 	
@@ -55,6 +65,9 @@ function walk(node)
 	}
 }
 
+/*
+* Ignore this function. It's just here as a reference.
+*/
 function handleText(textNode) 
 {
 
@@ -73,23 +86,32 @@ function handleText(textNode)
 	// }
 }
 
+/*
+* This function gets all the text on the page and can replace it with another word
+* Right now the function adds the words to an array and prints the length giving
+* the number of words on the page.
+*/
 function tester(){
-	var word_list=[];
-		var all = document.body.getElementsByTagName("*");
-for (var i=0, max=all.length; i < max; i++) {
+	var word_list=[]; //array intialization
+		var all = document.body.getElementsByTagName("*"); //gets all the tags on the page
+for (var i=0, max=all.length; i < max; i++) { //iterates through all the tags
   // console.log(all[i].nodeValue);
-  word_list.push(all[i].nodeValue);
-  for(var j = 0, max2 = all[i].childNodes.length; j < max2; j++) {
+  word_list.push(all[i].nodeValue); //adds the words to an array
+  for(var j = 0, max2 = all[i].childNodes.length; j < max2; j++) { //iterates through the tags of the children
     // console.log(all[i].childNodes[j].nodeValue);
-    word_list.push(all[i].childNodes[j].nodeValue);
+    word_list.push(all[i].childNodes[j].nodeValue); //adds those words to the array
   }
 }
-console.log(word_list.length);
+console.log(word_list.length); //prints the number of words in the array
 // for (var k=0; k < word_list.length; j++){
 // console.log(word_list[k]);	
 // }
 
 }
+
+/*
+* This function makes our API calls. All we do is pass in the url for the api.
+*/
 function httpGet(theUrl)
 {
 	var xhr = new XMLHttpRequest();
@@ -115,6 +137,10 @@ if( xmlDoc.getElementsByTagName("suggestion").length == 0 )
     // xmlHttp.send( null );
     // return xmlHttp.responseText;
 }
+/*
+* This function tells us the number of syllables in a word when called 
+* 
+*/
 function new_count(word) {
   word = word.toLowerCase();                                     //word.downcase!
   if(word.length <= 3) { return 1; }                             //return 1 if word.length <= 3
@@ -123,6 +149,10 @@ function new_count(word) {
   return word.match(/[aeiouy]{1,2}/g).length;                    //word.scan(/[aeiouy]{1,2}/).size
 }
 
+/*
+* This function returns true if the word complexity is greater or 
+* equal to 3. Otherwise false if it is less than 3.
+*/
 function word_complex(complexity){
 	var complex;
 	if (complexity >= 3){
@@ -131,4 +161,19 @@ function word_complex(complexity){
 		complex = true;
 	}
 	return complex;
+}
+
+/*
+* Ignore this function. 
+* 
+*/
+function store_old_code(){
+	// var x = httpGet('http://words.bighugelabs.com/api/2/d8ab7d606fcfe74a27f9dc072a5bc78c/word/json');
+	// var word = 'disseminate';
+	// var elementary_dictionary_api = 'http://www.dictionaryapi.com/api/v1/references/sd2/xml/' + word + '?key=a7cf95e7-6043-4374-8580-726a152fd156';
+	// console.log(elementary_dictionary_api);
+	// var x = httpGet(elementary_dictionary_api);
+	// console.log(x);
+	// x = x[0]
+	// console.log(x);
 }
