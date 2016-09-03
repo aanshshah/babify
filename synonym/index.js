@@ -1,9 +1,10 @@
-tester();
-
-function tester(){
 var natural = require('natural');
 var wordnet = new natural.WordNet();
-var word = 'delicious';
+
+walk(document.body);
+
+function generate_synonym(word){
+
 try{
 wordnet.lookup(word, function(results) {
     var appropriate_words=[]; 
@@ -33,6 +34,56 @@ console.log(appropriate_words);
 * This function tells us the number of syllables in a word when called 
 * 
 */
+/*
+* This function "walks" or traverses through all the words on the page by looking at 
+* each node and the children of the nodes to obtain the text on the page.
+*/
+function walk(node)  
+{
+    
+    var child, next;
+
+    switch ( node.nodeType )  
+    {
+        case 1: 
+        case 9:  
+        case 11: 
+            child = node.firstChild;
+            while ( child ) 
+            {
+                next = child.nextSibling; 
+                walk(child);
+                child = next;
+            }
+            break;
+
+        case 3: 
+            handleText(node);
+            break;
+    }
+}
+
+/*
+* Ignore this function. It's just here as a reference.
+*/
+function handleText(textNode) 
+{
+
+    var v = textNode.nodeValue;
+    if(analyze_word(v)){
+    
+    for (i = 0; i < word_list.length; i++) { 
+        
+        var synonym = generate_synonym(v);
+        synonym = synonym[0];
+        v = v.replace(v, synonym);
+        textNode.nodeValue = v;
+    }    
+    }
+    
+    
+}
+
 function new_count(word) {
   word = word.toLowerCase();                                     //word.downcase!
   if(word.length <= 3) { return 1; }                             //return 1 if word.length <= 3
@@ -61,14 +112,5 @@ function analyze_word(word){
     return word_complexity;
 }
 
-function replace_word(word){
-    var complex = analyze_word(word);
-        if (complex){
-//lookup synonym 
-//replace word 
-    }else{
-
-    }
-}
 
 
